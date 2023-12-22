@@ -67,6 +67,9 @@
 - **Seeders for Player and Team** have been implemented to populate the database with initial data, simplifying the testing and development process. You could populate the database with:
  `php artisan db:seed --class=PlayerSeeder`
  `php artisan db:seed --class=TeamSeeder`
+ 
+ ## Tests
+ Test are available with command `php artisan test`
 
 
 ## Authentication
