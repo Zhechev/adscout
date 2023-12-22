@@ -88,4 +88,5 @@
 ## Token Usage
 - The **issued token** must be included in the header of each API request for authentication.
 - **Header format**: `Authorization: Bearer <token>`
+- Token expired after 60 minutes!
 
