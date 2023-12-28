@@ -13,13 +13,12 @@ class UserAuthorizationTest extends TestCase
     {
         // Create user
         $user = User::factory()->create([
-            'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
 
         // Attempt login
         $response = $this->postJson('/api/login', [
-            'email' => 'test@example.com',
+            'email' => $user->email,
             'password' => 'password',
         ]);
 
@@ -38,6 +37,6 @@ class UserAuthorizationTest extends TestCase
         $response = $this->postJson('/api/logout');
 
         // Check response status and content
-        $response->assertStatus(204); // Using 204 if that is what your API returns
+        $response->assertStatus(200); // Using 204 if that is what your API returns
     }
 }

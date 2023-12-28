@@ -32,6 +32,9 @@ class PlayerApiTest extends TestCase
     public function test_it_returns_details_of_a_player()
     {
         $user = User::factory()->create();
+
+        Team::factory()->create();
+
         $player = Player::factory()->create();
 
         $response = $this->actingAs($user)->getJson("/api/players/{$player->id}");
