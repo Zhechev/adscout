@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Player;
+use App\Constants\MessageConstants;
 use App\Http\Requests\StorePlayerRequest;
 use App\Http\Requests\UpdatePlayerRequest;
 use App\Http\Resources\PlayerResource;
+use App\Models\Player;
 use App\Queries\PlayerQuery;
-use App\Constants\MessageConstants;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PlayerController extends Controller
 {
@@ -16,9 +17,9 @@ class PlayerController extends Controller
      * Fetches and returns a list of players, allowing filtering and pagination.
      *
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function index(Request $request,): \Illuminate\Http\JsonResponse
+    public function index(Request $request): JsonResponse
     {
         // Initialize a query for filtering and pagination
         $query = new PlayerQuery(Player::query(), $request);
@@ -39,7 +40,7 @@ class PlayerController extends Controller
      * Creates a new player and returns a JSON response with the player's data.
      *
      * @param StorePlayerRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(StorePlayerRequest $request)
     {
@@ -58,9 +59,9 @@ class PlayerController extends Controller
      * Returns a JSON response with the data of a specific player.
      *
      * @param Player $player
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function show(Player $player): \Illuminate\Http\JsonResponse
+    public function show(Player $player): JsonResponse
     {
         // Return a JSON response with the player's data
         return response()->json(['success' => true, 'data' => new PlayerResource($player)]);
@@ -71,9 +72,9 @@ class PlayerController extends Controller
      *
      * @param UpdatePlayerRequest $request
      * @param Player $player
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function update(UpdatePlayerRequest $request, Player $player): \Illuminate\Http\JsonResponse
+    public function update(UpdatePlayerRequest $request, Player $player): JsonResponse
     {
         // Update the player's data with the validated data from the request
         $player->update($request->validated());
@@ -90,9 +91,9 @@ class PlayerController extends Controller
      * Deletes a specific player and returns a JSON response for successful deletion.
      *
      * @param Player $player
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function destroy(Player $player): \Illuminate\Http\JsonResponse
+    public function destroy(Player $player): JsonResponse
     {
         // Delete the player
         $player->delete();
